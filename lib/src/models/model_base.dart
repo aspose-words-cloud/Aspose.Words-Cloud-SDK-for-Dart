@@ -73,6 +73,7 @@ abstract class ModelBase {
     'CustomXmlPartsResponse, _': () => CustomXmlPartsResponse(),
     'CustomXmlPartUpdate, _': () => CustomXmlPartUpdate(),
     'DigitalSignatureDetails, _': () => DigitalSignatureDetails(),
+    'DoclingSaveOptionsData, _': () => DoclingSaveOptionsData(),
     'DocmSaveOptionsData, _': () => DocmSaveOptionsData(),
     'DocSaveOptionsData, _': () => DocSaveOptionsData(),
     'Document, _': () => Document(),
