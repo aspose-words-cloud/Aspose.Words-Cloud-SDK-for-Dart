@@ -1,3 +1,8 @@
+## [26.2.0] - Aspose Words Cloud for Dart 26.2 Release Notes
+
+- Implemented ability to save documents as Docling JSON format.
+
+
 ## [26.1.0] - Aspose Words Cloud for Dart 26.1 Release Notes
 
 - Add fontsLocation parameter for Compare API.

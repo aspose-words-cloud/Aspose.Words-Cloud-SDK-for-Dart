@@ -70,6 +70,7 @@ export 'src/models/custom_xml_parts_collection.dart';
 export 'src/models/custom_xml_parts_response.dart';
 export 'src/models/digital_signature_details.dart';
 export 'src/models/doc_save_options_data.dart';
+export 'src/models/docling_save_options_data.dart';
 export 'src/models/docm_save_options_data.dart';
 export 'src/models/document_entry_list.dart';
 export 'src/models/document_entry.dart';
