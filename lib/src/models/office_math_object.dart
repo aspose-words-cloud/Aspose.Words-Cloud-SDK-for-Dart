@@ -141,7 +141,8 @@ class OfficeMathObject extends OfficeMathLink {
         case 'PreSubSuperscript': mathObjectType = OfficeMathObject_MathObjectTypeEnum.preSubSuperscript; break;
         case 'Subscript': mathObjectType = OfficeMathObject_MathObjectTypeEnum.subscript; break;
         case 'SubSuperscript': mathObjectType = OfficeMathObject_MathObjectTypeEnum.subSuperscript; break;
-        case 'Supercript': mathObjectType = OfficeMathObject_MathObjectTypeEnum.supercript; break;
+        case 'Superscript': mathObjectType = OfficeMathObject_MathObjectTypeEnum.superscript; break;
+        case 'None': mathObjectType = OfficeMathObject_MathObjectTypeEnum.none; break;
         default: mathObjectType = null; break;
       }
     } else {
@@ -208,7 +209,8 @@ class OfficeMathObject extends OfficeMathLink {
         case OfficeMathObject_MathObjectTypeEnum.preSubSuperscript: _result['MathObjectType'] = 'PreSubSuperscript'; break;
         case OfficeMathObject_MathObjectTypeEnum.subscript: _result['MathObjectType'] = 'Subscript'; break;
         case OfficeMathObject_MathObjectTypeEnum.subSuperscript: _result['MathObjectType'] = 'SubSuperscript'; break;
-        case OfficeMathObject_MathObjectTypeEnum.supercript: _result['MathObjectType'] = 'Supercript'; break;
+        case OfficeMathObject_MathObjectTypeEnum.superscript: _result['MathObjectType'] = 'Superscript'; break;
+        case OfficeMathObject_MathObjectTypeEnum.none: _result['MathObjectType'] = 'None'; break;
         default: break;
       }
     }
@@ -283,6 +285,7 @@ enum OfficeMathObject_MathObjectTypeEnum
   preSubSuperscript,
   subscript,
   subSuperscript,
-  supercript
+  superscript,
+  none
 }
 
