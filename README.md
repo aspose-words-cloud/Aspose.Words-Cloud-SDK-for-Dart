@@ -61,7 +61,7 @@ await wordsApi.saveAs(saveAsRequest);
 
 ## Licensing
 
-All Aspose.Words Cloud SDKs, helper scripts and templates are licensed under [MIT License](https://github.com/aspose-words-cloud/aspose-words-cloud-dart/blob/master/LICENSE). 
+All Aspose.Words Cloud SDKs, helper scripts and templates are licensed under [MIT License](https://github.com/aspose-words-cloud/Aspose.Words-Cloud-SDK-for-Dart/blob/master/LICENSE). 
 
 ## Contact Us
 Your feedback is very important to us. Please feel free to contact us using our [Support Forums](https://forum.aspose.cloud/c/words).
