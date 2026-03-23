@@ -37,7 +37,7 @@ node('words-linux') {
             }
             
             if (packageTesting) {
-                docker.image('dart:stable').inside {
+                docker.image('dart:3.11.2').inside {
                     stage('prepare'){
                         sh "rm -rf lib"
                         sh "cp ./pubspec_package_testing.yaml ./pubspec.yaml"
@@ -61,7 +61,7 @@ node('words-linux') {
                 } 
             }
             else if (needToBuild) {
-                docker.image('dart:stable').inside {
+                docker.image('dart:3.11.2').inside {
                     stage('prepare'){
                         sh "dart pub get"
                         sh "dart pub global activate junitreport"
