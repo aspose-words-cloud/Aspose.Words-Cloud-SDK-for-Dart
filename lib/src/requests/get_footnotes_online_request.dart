@@ -63,6 +63,11 @@ class GetFootnotesOnlineRequest implements RequestBase {
   GetFootnotesOnlineRequest(this.document, {this.nodePath, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/get/{nodePath}/footnotes';
     var _queryParams = <String, String>{};

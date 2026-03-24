@@ -59,6 +59,11 @@ class CopyFileRequest implements RequestBase {
   CopyFileRequest(this.destPath, this.srcPath, {this.srcStorageName, this.destStorageName, this.versionId, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/storage/file/copy/{srcPath}';
     var _queryParams = <String, String>{};

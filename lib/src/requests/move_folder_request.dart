@@ -56,6 +56,11 @@ class MoveFolderRequest implements RequestBase {
   MoveFolderRequest(this.destPath, this.srcPath, {this.srcStorageName, this.destStorageName, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/storage/folder/move/{srcPath}';
     var _queryParams = <String, String>{};

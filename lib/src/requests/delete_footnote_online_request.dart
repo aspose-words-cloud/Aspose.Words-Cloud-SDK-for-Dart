@@ -75,6 +75,11 @@ class DeleteFootnoteOnlineRequest implements RequestBase {
   DeleteFootnoteOnlineRequest(this.document, this.index, {this.nodePath, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/delete/{nodePath}/footnotes/{index}';
     var _queryParams = <String, String>{};

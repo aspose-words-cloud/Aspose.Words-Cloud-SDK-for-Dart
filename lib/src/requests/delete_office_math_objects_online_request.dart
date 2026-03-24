@@ -69,6 +69,11 @@ class DeleteOfficeMathObjectsOnlineRequest implements RequestBase {
   DeleteOfficeMathObjectsOnlineRequest(this.document, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/delete/OfficeMathObjects';
     var _queryParams = <String, String>{};

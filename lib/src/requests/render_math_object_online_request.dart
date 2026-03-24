@@ -74,6 +74,11 @@ class RenderMathObjectOnlineRequest implements RequestBase {
   RenderMathObjectOnlineRequest(this.document, this.format, this.index, {this.nodePath, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.fontsLocation, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/get/{nodePath}/OfficeMathObjects/{index}/render';
     var _queryParams = <String, String>{};

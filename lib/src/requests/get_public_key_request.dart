@@ -46,6 +46,11 @@ class GetPublicKeyRequest implements RequestBase {
   GetPublicKeyRequest({ this.sendDataProgressCallback, this.receiveDataProgressCallback });
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/encryption/publickey';
     var _queryParams = <String, String>{};

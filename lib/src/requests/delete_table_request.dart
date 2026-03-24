@@ -80,6 +80,11 @@ class DeleteTableRequest implements RequestBase {
   DeleteTableRequest(this.name, this.index, {this.nodePath, this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/{nodePath}/tables/{index}';
     var _queryParams = <String, String>{};

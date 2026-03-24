@@ -66,6 +66,11 @@ class GetRangeTextOnlineRequest implements RequestBase {
   GetRangeTextOnlineRequest(this.document, this.rangeStartIdentifier, {this.rangeEndIdentifier, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/get/range/{rangeStartIdentifier}/{rangeEndIdentifier}';
     var _queryParams = <String, String>{};

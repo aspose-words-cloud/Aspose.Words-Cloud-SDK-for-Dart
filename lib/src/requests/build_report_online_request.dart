@@ -56,6 +56,11 @@ class BuildReportOnlineRequest implements RequestBase {
   BuildReportOnlineRequest(this.template, this.data, this.reportEngineSettings, {this.documentFileName, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/buildReport';
     var _queryParams = <String, String>{};

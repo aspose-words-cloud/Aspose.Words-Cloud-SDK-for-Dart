@@ -74,6 +74,11 @@ class InsertTableCellOnlineRequest implements RequestBase {
   InsertTableCellOnlineRequest(this.document, this.cell, {this.tableRowPath, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/post/{tableRowPath}/cells';
     var _queryParams = <String, String>{};

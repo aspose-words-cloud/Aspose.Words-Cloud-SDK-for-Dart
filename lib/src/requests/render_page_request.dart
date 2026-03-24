@@ -74,6 +74,11 @@ class RenderPageRequest implements RequestBase {
   RenderPageRequest(this.name, this.pageIndex, this.format, {this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.fontsLocation, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/pages/{pageIndex}/render';
     var _queryParams = <String, String>{};

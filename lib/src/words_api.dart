@@ -106,14 +106,20 @@ class WordsApi {
     return await _apiClient.call(request) as ByteData;
   }
 
+  /// Converts a document on a local drive to the specified format.
+  Future< JobHandler< ByteData > > convertDocumentJob(ConvertDocumentJobRequest request) async {
+    var _info = await _apiClient.call(request) as JobInfo;
+    return JobHandler< ByteData >(_apiClient, request.getOriginalRequest(), _info);
+  }
+
   /// Copy file.
   Future< void > copyFile(CopyFileRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Copy folder.
   Future< void > copyFolder(CopyFolderRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Makes a copy of the style in the document.
@@ -139,7 +145,7 @@ class WordsApi {
 
   /// Create the folder.
   Future< void > createFolder(CreateFolderRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Adds a new or updates an existing document property.
@@ -164,7 +170,7 @@ class WordsApi {
 
   /// Removes a bookmark from the document.
   Future< void > deleteBookmark(DeleteBookmarkRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a bookmark from the document.
@@ -174,7 +180,7 @@ class WordsApi {
 
   /// Removes all bookmarks from the document.
   Future< void > deleteBookmarks(DeleteBookmarksRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes all bookmarks from the document.
@@ -208,7 +214,7 @@ class WordsApi {
 
   /// Removes a comment from the document.
   Future< void > deleteComment(DeleteCommentRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a comment from the document.
@@ -218,7 +224,7 @@ class WordsApi {
 
   /// Removes all comments from the document.
   Future< void > deleteComments(DeleteCommentsRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes all comments from the document.
@@ -228,7 +234,7 @@ class WordsApi {
 
   /// Removes the custom xml part from the document.
   Future< void > deleteCustomXmlPart(DeleteCustomXmlPartRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes the custom xml part from the document.
@@ -238,7 +244,7 @@ class WordsApi {
 
   /// Removes all custom xml parts from the document.
   Future< void > deleteCustomXmlParts(DeleteCustomXmlPartsRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes all custom xml parts from the document.
@@ -248,7 +254,7 @@ class WordsApi {
 
   /// Removes a document property.
   Future< void > deleteDocumentProperty(DeleteDocumentPropertyRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a document property.
@@ -258,7 +264,7 @@ class WordsApi {
 
   /// Removes a DrawingObject from the document node.
   Future< void > deleteDrawingObject(DeleteDrawingObjectRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a DrawingObject from the document node.
@@ -268,7 +274,7 @@ class WordsApi {
 
   /// Removes a field from the document node.
   Future< void > deleteField(DeleteFieldRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a field from the document node.
@@ -278,7 +284,7 @@ class WordsApi {
 
   /// Removes fields from the document node.
   Future< void > deleteFields(DeleteFieldsRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes fields from the document node.
@@ -288,17 +294,17 @@ class WordsApi {
 
   /// Delete file.
   Future< void > deleteFile(DeleteFileRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Delete folder.
   Future< void > deleteFolder(DeleteFolderRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a footnote from the document node.
   Future< void > deleteFootnote(DeleteFootnoteRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a footnote from the document node.
@@ -308,7 +314,7 @@ class WordsApi {
 
   /// Removes a form field from the document node.
   Future< void > deleteFormField(DeleteFormFieldRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a form field from the document node.
@@ -318,7 +324,7 @@ class WordsApi {
 
   /// Removes a HeaderFooter object from the document section.
   Future< void > deleteHeaderFooter(DeleteHeaderFooterRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a HeaderFooter object from the document section.
@@ -328,7 +334,7 @@ class WordsApi {
 
   /// Removes HeaderFooter objects from the document section.
   Future< void > deleteHeadersFooters(DeleteHeadersFootersRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes HeaderFooter objects from the document section.
@@ -338,7 +344,7 @@ class WordsApi {
 
   /// Removes macros from the document.
   Future< void > deleteMacros(DeleteMacrosRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes macros from the document.
@@ -348,7 +354,7 @@ class WordsApi {
 
   /// Removes an OfficeMath object from the document node.
   Future< void > deleteOfficeMathObject(DeleteOfficeMathObjectRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes an OfficeMath object from the document node.
@@ -358,7 +364,7 @@ class WordsApi {
 
   /// Removes all office math objects from the document.
   Future< void > deleteOfficeMathObjects(DeleteOfficeMathObjectsRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes all office math objects from the document.
@@ -368,7 +374,7 @@ class WordsApi {
 
   /// Removes a paragraph from the document node.
   Future< void > deleteParagraph(DeleteParagraphRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes the formatting properties of a paragraph list from the document node.
@@ -398,7 +404,7 @@ class WordsApi {
 
   /// Removes a Run object from the paragraph.
   Future< void > deleteRun(DeleteRunRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a Run object from the paragraph.
@@ -408,7 +414,7 @@ class WordsApi {
 
   /// Removes a section from the document.
   Future< void > deleteSection(DeleteSectionRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a section from the document.
@@ -418,7 +424,7 @@ class WordsApi {
 
   /// Removes a StructuredDocumentTag (SDT) from the document node.
   Future< void > deleteStructuredDocumentTag(DeleteStructuredDocumentTagRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a StructuredDocumentTag (SDT) from the document node.
@@ -428,12 +434,12 @@ class WordsApi {
 
   /// Removes a table from the document node.
   Future< void > deleteTable(DeleteTableRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a cell from the table row.
   Future< void > deleteTableCell(DeleteTableCellRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a cell from the table row.
@@ -448,7 +454,7 @@ class WordsApi {
 
   /// Removes a row from the table.
   Future< void > deleteTableRow(DeleteTableRowRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Removes a row from the table.
@@ -1225,7 +1231,7 @@ class WordsApi {
 
   /// Inserts a section to the document.
   Future< void > insertSection(InsertSectionRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Inserts a section to the document.
@@ -1319,7 +1325,7 @@ class WordsApi {
 
   /// Links headers / footers of the section to the previous one.
   Future< void > linkHeaderFootersToPrevious(LinkHeaderFootersToPreviousRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Downloads a document from the Web using URL and saves it to cloud storage in the specified format.
@@ -1334,7 +1340,7 @@ class WordsApi {
 
   /// Merge the section with the next one.
   Future< void > mergeWithNext(MergeWithNextRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Merge the section with the next one.
@@ -1344,17 +1350,17 @@ class WordsApi {
 
   /// Move file.
   Future< void > moveFile(MoveFileRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Move folder.
   Future< void > moveFolder(MoveFolderRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Applies document content optimization options, specific to a particular versions of Microsoft Word.
   Future< void > optimizeDocument(OptimizeDocumentRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Applies document content optimization options, specific to a particular versions of Microsoft Word.
@@ -1474,7 +1480,7 @@ class WordsApi {
 
   /// Clears the font cache.
   Future< void > resetCache(ResetCacheRequest request) async {
-  await _apiClient.call(request);
+    await _apiClient.call(request);
   }
 
   /// Converts a document in cloud storage to the specified format.

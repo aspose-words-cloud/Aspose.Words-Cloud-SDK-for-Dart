@@ -69,6 +69,11 @@ class GetStyleRequest implements RequestBase {
   GetStyleRequest(this.name, this.styleName, {this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/styles/{styleName}';
     var _queryParams = <String, String>{};

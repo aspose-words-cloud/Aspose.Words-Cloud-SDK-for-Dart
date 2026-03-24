@@ -84,6 +84,11 @@ class UpdateRunFontRequest implements RequestBase {
   UpdateRunFontRequest(this.name, this.paragraphPath, this.index, this.fontDto, {this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/{paragraphPath}/runs/{index}/font';
     var _queryParams = <String, String>{};

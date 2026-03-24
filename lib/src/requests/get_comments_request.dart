@@ -66,6 +66,11 @@ class GetCommentsRequest implements RequestBase {
   GetCommentsRequest(this.name, {this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/comments';
     var _queryParams = <String, String>{};

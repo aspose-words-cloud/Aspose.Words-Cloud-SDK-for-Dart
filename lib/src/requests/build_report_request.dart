@@ -75,6 +75,11 @@ class BuildReportRequest implements RequestBase {
   BuildReportRequest(this.name, this.data, this.reportEngineSettings, {this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/buildReport';
     var _queryParams = <String, String>{};

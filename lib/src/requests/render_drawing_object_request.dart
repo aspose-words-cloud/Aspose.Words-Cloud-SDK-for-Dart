@@ -80,6 +80,11 @@ class RenderDrawingObjectRequest implements RequestBase {
   RenderDrawingObjectRequest(this.name, this.format, this.index, {this.nodePath, this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.fontsLocation, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/{nodePath}/drawingObjects/{index}/render';
     var _queryParams = <String, String>{};

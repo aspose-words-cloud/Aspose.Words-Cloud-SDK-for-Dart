@@ -51,6 +51,11 @@ class LoadWebDocumentRequest implements RequestBase {
   LoadWebDocumentRequest(this.data, {this.storage, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/loadWebDocument';
     var _queryParams = <String, String>{};

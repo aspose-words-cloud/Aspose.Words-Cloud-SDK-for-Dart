@@ -72,6 +72,11 @@ class GetParagraphListFormatRequest implements RequestBase {
   GetParagraphListFormatRequest(this.name, this.index, {this.nodePath, this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/{nodePath}/paragraphs/{index}/listFormat';
     var _queryParams = <String, String>{};

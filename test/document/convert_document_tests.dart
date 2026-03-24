@@ -167,4 +167,18 @@ class ConvertDocumentTests
 
     await context.getApi().convertDocument(request);
   }
+
+  /// A test for ConvertDocument as a job.
+  Future<void> testConvertDocumentJob() async
+  {
+    final requestDocument = await context.loadBinaryFile(localFolder + '/test_uploadfile.docx');
+
+    final request = ConvertDocumentJobRequest(
+      requestDocument,
+      'pdf'
+    );
+
+    final jobHandler = await context.getApi().convertDocumentJob(request);
+    await jobHandler.waitResult(const Duration(seconds: 3));
+  }
 }

@@ -63,6 +63,11 @@ class GetStyleOnlineRequest implements RequestBase {
   GetStyleOnlineRequest(this.document, this.styleName, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/get/styles/{styleName}';
     var _queryParams = <String, String>{};

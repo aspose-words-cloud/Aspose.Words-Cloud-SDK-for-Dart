@@ -174,6 +174,7 @@ void main() {
     test('SaveAsTiff', () async => await ConvertDocumentTests(testContext).testSaveAsTiff());
     test('SaveAsTiffOnline', () async => await ConvertDocumentTests(testContext).testSaveAsTiffOnline());
     test('ConvertDocument', () async => await ConvertDocumentTests(testContext).testConvertDocument());
+    test('ConvertDocumentJob', () async => await ConvertDocumentTests(testContext).testConvertDocumentJob());
   });
 
   group('CustomXmlParts', () {

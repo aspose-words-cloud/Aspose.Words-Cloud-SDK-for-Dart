@@ -447,6 +447,15 @@ class ApiClient {
     return request.deserializeResponse(this, response.headers, response.content);
   }
 
+  Future< List< ByteData > > callJobResult(final String jobId) async {
+    var _queryParams = <String, String>{'id': jobId};
+    var _url = configuration.getApiRootUrl() + applyQueryParams('/words/job', _queryParams).replaceAll('//', '/');
+    var _headers = <String, String>{};
+    var _requestData = ApiRequestData('GET', _url, _headers, null, null, null);
+    var _response = await _callWithChecks(_requestData);
+    return deserializeMultipartArray(_response.content);
+  }
+
   Future< List<dynamic> > callBatch(final List<BatchRequest> requests, final bool displayIntermediateResults) async {
     var bodyParts = <ApiRequestPart>[];
     for (final request in requests) {
