@@ -57,10 +57,10 @@ class JobHandler<T> {
       var json = jsonDecode(utf8.decode(parts[0].buffer.asUint8List(parts[0].offsetInBytes, parts[0].lengthInBytes)));
       newinfo.deserialize(json as Map<String, dynamic>);
       _info = newinfo;
-    }
 
-    if (parts.length == 2) {
-      _result = _apiClient.deserializeBatchPart(_request, parts[1]) as T;
+      if (parts.length == 2 && newinfo.status == JobInfo_StatusEnum.succeded) {
+        _result = _apiClient.deserializeHttpResponsePart(_request, parts[1]) as T;
+      }
     }
   }
 
@@ -71,7 +71,7 @@ class JobHandler<T> {
     }
 
     if (status != JobInfo_StatusEnum.succeded) {
-      throw ApiException(400, 'Invalid job result "${status}" with message "${message}".');
+      throw ApiException(400, 'Job failed with status "${status}" - "${message}".');
     }
 
     return result!;
