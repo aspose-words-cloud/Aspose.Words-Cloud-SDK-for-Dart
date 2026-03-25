@@ -76,7 +76,7 @@ class ConvertDocumentJobRequest implements RequestBase {
 
   @override
   RequestBase getOriginalRequest() {
-    return ConvertDocumentRequest(this.document, this.format, {this.outPath, this.fileNameFieldValue, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.fontsLocation, this.sendDataProgressCallback, this.receiveDataProgressCallback});
+    return ConvertDocumentRequest(this.document, this.format, outPath: this.outPath, fileNameFieldValue: this.fileNameFieldValue, storage: this.storage, loadEncoding: this.loadEncoding, password: this.password, encryptedPassword: this.encryptedPassword, openTypeSupport: this.openTypeSupport, fontsLocation: this.fontsLocation, sendDataProgressCallback: this.sendDataProgressCallback, receiveDataProgressCallback: this.receiveDataProgressCallback);
   }
 
   @override
