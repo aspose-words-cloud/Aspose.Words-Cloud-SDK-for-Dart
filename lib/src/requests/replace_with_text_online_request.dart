@@ -71,6 +71,11 @@ class ReplaceWithTextOnlineRequest implements RequestBase {
   ReplaceWithTextOnlineRequest(this.document, this.rangeStartIdentifier, this.rangeText, {this.rangeEndIdentifier, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/post/range/{rangeStartIdentifier}/{rangeEndIdentifier}';
     var _queryParams = <String, String>{};

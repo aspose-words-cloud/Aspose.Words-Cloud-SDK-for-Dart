@@ -63,6 +63,28 @@ class SplitDocumentToFormatTests
     expect(result.splitResult?.pages?.length, 2);
   }
 
+  /// Test for document splitting job.
+  Future<void> testSplitDocumentJob() async
+  {
+    final remoteFileName = 'TestSplitDocument.docx';
+    await context.uploadFile(localFile, remoteDataFolder + '/' + remoteFileName);
+
+    final request = SplitDocumentJobRequest(
+      remoteFileName,
+      'text',
+      folder: remoteDataFolder,
+      destFileName: context.baseTestOutPath + '/TestSplitDocument.text',
+      from: 1,
+      to: 2
+    );
+
+    final jobHandler = await context.getApi().splitDocumentJob(request);
+    final result = await jobHandler.waitResult(const Duration(seconds: 3));
+    expect(result.splitResult, isNotNull);
+    expect(result.splitResult?.pages, isNotNull);
+    expect(result.splitResult?.pages?.length, 2);
+  }
+
   /// Test for document splitting online.
   Future<void> testSplitDocumentOnline() async
   {
@@ -77,5 +99,22 @@ class SplitDocumentToFormatTests
     );
 
     await context.getApi().splitDocumentOnline(request);
+  }
+
+  /// Test for document splitting online job.
+  Future<void> testSplitDocumentOnlineJob() async
+  {
+    final requestDocument = await context.loadBinaryFile(localFile);
+
+    final request = SplitDocumentOnlineJobRequest(
+      requestDocument,
+      'text',
+      destFileName: context.baseTestOutPath + '/TestSplitDocument.text',
+      from: 1,
+      to: 2
+    );
+
+    final jobHandler = await context.getApi().splitDocumentOnlineJob(request);
+    await jobHandler.waitResult(const Duration(seconds: 3));
   }
 }

@@ -74,6 +74,11 @@ class ConvertDocumentRequest implements RequestBase {
   ConvertDocumentRequest(this.document, this.format, {this.outPath, this.fileNameFieldValue, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.fontsLocation, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/convert';
     var _queryParams = <String, String>{};

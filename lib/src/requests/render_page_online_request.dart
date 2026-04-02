@@ -68,6 +68,11 @@ class RenderPageOnlineRequest implements RequestBase {
   RenderPageOnlineRequest(this.document, this.pageIndex, this.format, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.fontsLocation, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/get/pages/{pageIndex}/render';
     var _queryParams = <String, String>{};

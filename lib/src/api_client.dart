@@ -428,6 +428,53 @@ class ApiClient {
     return request.deserializeResponse(this, {}, body);
   }
 
+  dynamic deserializeHttpResponsePart(final RequestBase request, final ByteData partData) {
+    var statusLineEndIndex = partData.indexOf(_newline);
+    if (statusLineEndIndex == null) {
+      throw ApiException(400, 'Failed to parse HTTP response part.');
+    }
+
+    var statusLineData = ByteData.sublistView(partData, 0, statusLineEndIndex);
+    var statusLine = utf8.decoder.convert(statusLineData.buffer.asUint8List(statusLineData.offsetInBytes, statusLineData.lengthInBytes));
+    var statusLineParts = statusLine.split(' ');
+    if (statusLineParts.length < 3 || !statusLineParts[0].startsWith('HTTP/')) {
+      throw ApiException(400, 'Failed to parse HTTP response part.');
+    }
+
+    var statusCode = int.tryParse(statusLineParts[1]);
+    if (statusCode == null) {
+      throw ApiException(400, 'Failed to parse HTTP response part.');
+    }
+
+    var headers = <String, String>{};
+    var headersEndIndex = partData.indexOf(_newline2x);
+    ByteData? body;
+    if (headersEndIndex != null) {
+      var headersData = ByteData.sublistView(partData, statusLineEndIndex + _newline.lengthInBytes, headersEndIndex);
+      var headersStr = utf8.decoder.convert(headersData.buffer.asUint8List(headersData.offsetInBytes, headersData.lengthInBytes));
+      for (final headerLine in headersStr.split('\r\n')) {
+        if (headerLine.isEmpty || !headerLine.contains(':')) {
+          continue;
+        }
+
+        var headerParts = headerLine.split(':');
+        if (headerParts.length < 2) {
+          continue;
+        }
+
+        headers[headerParts[0].trim()] = headerParts.sublist(1).join(':').trim();
+      }
+
+      body = ByteData.sublistView(partData, headersEndIndex + _newline2x.lengthInBytes);
+    }
+
+    if (statusCode >= 200 && statusCode < 300) {
+      return request.deserializeResponse(this, headers, body);
+    }
+
+    return null;
+  }
+
   ByteData toByteData(final List<Uint8List> bufferStream) {
     var wholeSize = 0;
     var fillIndex = 0;
@@ -445,6 +492,15 @@ class ApiClient {
     var requestData = await request.createRequestData(this);
     var response = await _callWithChecks(requestData);
     return request.deserializeResponse(this, response.headers, response.content);
+  }
+
+  Future< List< ByteData > > callJobResult(final String jobId) async {
+    var _queryParams = <String, String>{'id': jobId};
+    var _url = configuration.getApiRootUrl() + applyQueryParams('/words/job', _queryParams).replaceAll('//', '/');
+    var _headers = <String, String>{};
+    var _requestData = ApiRequestData('GET', _url, _headers, null, null, null);
+    var _response = await _callWithChecks(_requestData);
+    return deserializeMultipartArray(_response.content);
   }
 
   Future< List<dynamic> > callBatch(final List<BatchRequest> requests, final bool displayIntermediateResults) async {

@@ -84,6 +84,11 @@ class InsertWatermarkImageRequest implements RequestBase {
   InsertWatermarkImageRequest(this.name, {this.imageFile, this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.rotationAngle, this.image, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/watermarks/images';
     var _queryParams = <String, String>{};

@@ -65,6 +65,11 @@ class SaveAsOnlineRequest implements RequestBase {
   SaveAsOnlineRequest(this.document, this.saveOptionsData, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.fontsLocation, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/put/saveAs';
     var _queryParams = <String, String>{};

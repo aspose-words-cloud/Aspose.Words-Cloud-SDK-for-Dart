@@ -77,6 +77,11 @@ class UpdateTableCellFormatOnlineRequest implements RequestBase {
   UpdateTableCellFormatOnlineRequest(this.document, this.tableRowPath, this.format, this.index, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/put/{tableRowPath}/cells/{index}/cellformat';
     var _queryParams = <String, String>{};

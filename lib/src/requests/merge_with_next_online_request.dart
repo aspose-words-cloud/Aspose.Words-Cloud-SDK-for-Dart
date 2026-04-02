@@ -72,6 +72,11 @@ class MergeWithNextOnlineRequest implements RequestBase {
   MergeWithNextOnlineRequest(this.document, this.sectionIndex, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/put/merge/sections/{sectionIndex}';
     var _queryParams = <String, String>{};

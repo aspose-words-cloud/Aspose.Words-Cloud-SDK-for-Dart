@@ -72,6 +72,11 @@ class GetBorderRequest implements RequestBase {
   GetBorderRequest(this.name, this.borderType, {this.nodePath, this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/{nodePath}/borders/{borderType}';
     var _queryParams = <String, String>{};

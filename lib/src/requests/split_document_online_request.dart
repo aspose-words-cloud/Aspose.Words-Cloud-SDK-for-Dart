@@ -77,6 +77,11 @@ class SplitDocumentOnlineRequest implements RequestBase {
   SplitDocumentOnlineRequest(this.document, this.format, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.from, this.to, this.zipOutput, this.fontsLocation, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/put/split';
     var _queryParams = <String, String>{};

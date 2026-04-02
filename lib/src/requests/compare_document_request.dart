@@ -75,6 +75,11 @@ class CompareDocumentRequest implements RequestBase {
   CompareDocumentRequest(this.name, this.compareData, {this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.fontsLocation, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/compareDocument';
     var _queryParams = <String, String>{};

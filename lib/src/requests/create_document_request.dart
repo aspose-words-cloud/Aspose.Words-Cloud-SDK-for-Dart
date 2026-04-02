@@ -54,6 +54,11 @@ class CreateDocumentRequest implements RequestBase {
   CreateDocumentRequest(this.fileName, {this.folder, this.storage, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/create';
     var _queryParams = <String, String>{};

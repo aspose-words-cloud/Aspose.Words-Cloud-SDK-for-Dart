@@ -60,6 +60,25 @@ class ExecuteMailMergeTests
     await context.getApi().executeMailMergeOnline(request);
   }
 
+  /// Test for executing mail merge online job.
+  Future<void> testExecuteMailMergeOnlineJob() async
+  {
+    final localDocumentFile = 'SampleExecuteTemplate.docx';
+    final localDataFile = 'SampleExecuteTemplateData.txt';
+    final requestTemplate = await context.loadBinaryFile(mailMergeFolder + '/' + localDocumentFile);
+
+    final requestData = await context.loadBinaryFile(mailMergeFolder + '/' + localDataFile);
+
+    final request = ExecuteMailMergeOnlineJobRequest(
+      requestTemplate,
+      requestData,
+      withRegions: true
+    );
+
+    final jobHandler = await context.getApi().executeMailMergeOnlineJob(request);
+    await jobHandler.waitResult(const Duration(seconds: 3));
+  }
+
   /// Test for executing mail merge.
   Future<void> testExecuteMailMerge() async
   {
@@ -77,6 +96,28 @@ class ExecuteMailMergeTests
     );
 
     final result = await context.getApi().executeMailMerge(request);
+    expect(result.document, isNotNull);
+    expect(result.document?.fileName, 'TestExecuteMailMerge.docx');
+  }
+
+  /// Test for executing mail merge job.
+  Future<void> testExecuteMailMergeJob() async
+  {
+    final localDocumentFile = 'SampleExecuteTemplate.docx';
+    final remoteFileName = 'TestExecuteMailMerge.docx';
+    final localDataFile = await context.loadTextFile(mailMergeFolder + '/SampleMailMergeTemplateData.txt');
+    await context.uploadFile(mailMergeFolder + '/' + localDocumentFile, remoteDataFolder + '/' + remoteFileName);
+
+    final request = ExecuteMailMergeJobRequest(
+      remoteFileName,
+      data: localDataFile,
+      folder: remoteDataFolder,
+      withRegions: true,
+      destFileName: context.baseTestOutPath + '/' + remoteFileName
+    );
+
+    final jobHandler = await context.getApi().executeMailMergeJob(request);
+    final result = await jobHandler.waitResult(const Duration(seconds: 3));
     expect(result.document, isNotNull);
     expect(result.document?.fileName, 'TestExecuteMailMerge.docx');
   }

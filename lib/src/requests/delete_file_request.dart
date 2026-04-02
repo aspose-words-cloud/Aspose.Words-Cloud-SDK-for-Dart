@@ -53,6 +53,11 @@ class DeleteFileRequest implements RequestBase {
   DeleteFileRequest(this.path, {this.storageName, this.versionId, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/storage/file/{path}';
     var _queryParams = <String, String>{};

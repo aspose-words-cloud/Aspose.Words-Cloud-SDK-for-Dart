@@ -136,7 +136,9 @@ void main() {
 
   group('AppendDocument', () {
     test('AppendDocument', () async => await AppendDocumentTests(testContext).testAppendDocument());
+    test('AppendDocumentJob', () async => await AppendDocumentTests(testContext).testAppendDocumentJob());
     test('AppendDocumentOnline', () async => await AppendDocumentTests(testContext).testAppendDocumentOnline());
+    test('AppendDocumentOnlineJob', () async => await AppendDocumentTests(testContext).testAppendDocumentOnlineJob());
   });
 
   group('Comment', () {
@@ -174,6 +176,7 @@ void main() {
     test('SaveAsTiff', () async => await ConvertDocumentTests(testContext).testSaveAsTiff());
     test('SaveAsTiffOnline', () async => await ConvertDocumentTests(testContext).testSaveAsTiffOnline());
     test('ConvertDocument', () async => await ConvertDocumentTests(testContext).testConvertDocument());
+    test('ConvertDocumentJob', () async => await ConvertDocumentTests(testContext).testConvertDocumentJob());
   });
 
   group('CustomXmlParts', () {
@@ -235,7 +238,9 @@ void main() {
 
   group('SplitDocumentToFormat', () {
     test('SplitDocument', () async => await SplitDocumentToFormatTests(testContext).testSplitDocument());
+    test('SplitDocumentJob', () async => await SplitDocumentToFormatTests(testContext).testSplitDocumentJob());
     test('SplitDocumentOnline', () async => await SplitDocumentToFormatTests(testContext).testSplitDocumentOnline());
+    test('SplitDocumentOnlineJob', () async => await SplitDocumentToFormatTests(testContext).testSplitDocumentOnlineJob());
   });
 
   group('DocumentProperties', () {
@@ -400,7 +405,9 @@ void main() {
 
   group('ExecuteMailMerge', () {
     test('ExecuteMailMergeOnline', () async => await ExecuteMailMergeTests(testContext).testExecuteMailMergeOnline());
+    test('ExecuteMailMergeOnlineJob', () async => await ExecuteMailMergeTests(testContext).testExecuteMailMergeOnlineJob());
     test('ExecuteMailMerge', () async => await ExecuteMailMergeTests(testContext).testExecuteMailMerge());
+    test('ExecuteMailMergeJob', () async => await ExecuteMailMergeTests(testContext).testExecuteMailMergeJob());
   });
 
   group('ExecuteTemplate', () {

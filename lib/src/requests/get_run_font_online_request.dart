@@ -66,6 +66,11 @@ class GetRunFontOnlineRequest implements RequestBase {
   GetRunFontOnlineRequest(this.document, this.paragraphPath, this.index, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/get/{paragraphPath}/runs/{index}/font';
     var _queryParams = <String, String>{};

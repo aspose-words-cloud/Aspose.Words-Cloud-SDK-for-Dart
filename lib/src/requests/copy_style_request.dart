@@ -78,6 +78,11 @@ class CopyStyleRequest implements RequestBase {
   CopyStyleRequest(this.name, this.styleCopy, {this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/styles/copy';
     var _queryParams = <String, String>{};

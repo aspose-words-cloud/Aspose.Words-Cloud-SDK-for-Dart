@@ -66,6 +66,11 @@ class GetParagraphTabStopsOnlineRequest implements RequestBase {
   GetParagraphTabStopsOnlineRequest(this.document, this.index, {this.nodePath, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/get/{nodePath}/paragraphs/{index}/tabstops';
     var _queryParams = <String, String>{};

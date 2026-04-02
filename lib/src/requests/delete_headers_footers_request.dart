@@ -80,6 +80,11 @@ class DeleteHeadersFootersRequest implements RequestBase {
   DeleteHeadersFootersRequest(this.name, this.sectionPath, {this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.headersFootersTypes, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/{sectionPath}/headersfooters';
     var _queryParams = <String, String>{};

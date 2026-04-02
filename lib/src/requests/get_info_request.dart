@@ -46,6 +46,11 @@ class GetInfoRequest implements RequestBase {
   GetInfoRequest({ this.sendDataProgressCallback, this.receiveDataProgressCallback });
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/info';
     var _queryParams = <String, String>{};
