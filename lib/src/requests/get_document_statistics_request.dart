@@ -75,6 +75,11 @@ class GetDocumentStatisticsRequest implements RequestBase {
   GetDocumentStatisticsRequest(this.name, {this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.includeComments, this.includeFootnotes, this.includeTextInShapes, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/statistics';
     var _queryParams = <String, String>{};

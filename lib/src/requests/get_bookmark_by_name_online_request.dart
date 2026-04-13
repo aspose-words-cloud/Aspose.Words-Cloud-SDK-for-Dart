@@ -63,6 +63,11 @@ class GetBookmarkByNameOnlineRequest implements RequestBase {
   GetBookmarkByNameOnlineRequest(this.document, this.bookmarkName, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/get/bookmarks/{bookmarkName}';
     var _queryParams = <String, String>{};

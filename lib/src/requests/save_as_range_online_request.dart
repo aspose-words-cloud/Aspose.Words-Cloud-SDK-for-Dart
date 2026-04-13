@@ -68,6 +68,11 @@ class SaveAsRangeOnlineRequest implements RequestBase {
   SaveAsRangeOnlineRequest(this.document, this.rangeStartIdentifier, this.documentParameters, {this.rangeEndIdentifier, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/post/range/{rangeStartIdentifier}/{rangeEndIdentifier}/SaveAs';
     var _queryParams = <String, String>{};

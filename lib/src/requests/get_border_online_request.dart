@@ -66,6 +66,11 @@ class GetBorderOnlineRequest implements RequestBase {
   GetBorderOnlineRequest(this.document, this.borderType, {this.nodePath, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/get/{nodePath}/borders/{borderType}';
     var _queryParams = <String, String>{};

@@ -74,6 +74,11 @@ class UpdateStyleOnlineRequest implements RequestBase {
   UpdateStyleOnlineRequest(this.document, this.styleName, this.styleUpdate, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/put/styles/{styleName}/update';
     var _queryParams = <String, String>{};

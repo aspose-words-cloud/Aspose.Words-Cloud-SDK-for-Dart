@@ -63,6 +63,11 @@ class GetCommentOnlineRequest implements RequestBase {
   GetCommentOnlineRequest(this.document, this.commentIndex, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/get/comments/{commentIndex}';
     var _queryParams = <String, String>{};

@@ -116,6 +116,11 @@ class SaveAsTiffOnlineRequest implements RequestBase {
   SaveAsTiffOnlineRequest(this.document, this.saveOptions, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.useAntiAliasing, this.useHighQualityRendering, this.imageBrightness, this.imageColorMode, this.imageContrast, this.numeralFormat, this.pageCount, this.pageIndex, this.paperColor, this.pixelFormat, this.resolution, this.scale, this.tiffCompression, this.dmlRenderingMode, this.dmlEffectsRenderingMode, this.tiffBinarizationMethod, this.zipOutput, this.fontsLocation, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/put/saveAs/tiff';
     var _queryParams = <String, String>{};

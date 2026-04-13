@@ -71,6 +71,11 @@ class InsertCommentOnlineRequest implements RequestBase {
   InsertCommentOnlineRequest(this.document, this.comment, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/post/comments';
     var _queryParams = <String, String>{};

@@ -77,6 +77,11 @@ class InsertFormFieldOnlineRequest implements RequestBase {
   InsertFormFieldOnlineRequest(this.document, this.formField, {this.nodePath, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.insertBeforeNode, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/post/{nodePath}/formfields';
     var _queryParams = <String, String>{};

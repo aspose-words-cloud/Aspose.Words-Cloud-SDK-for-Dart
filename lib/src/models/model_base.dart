@@ -157,6 +157,7 @@ abstract class ModelBase {
     'ImageEntryList, _': () => ImageEntryList(),
     'InfoAdditionalItem, _': () => InfoAdditionalItem(),
     'InfoResponse, _': () => InfoResponse(),
+    'JobInfo, _': () => JobInfo(),
     'JpegSaveOptionsData, _': () => JpegSaveOptionsData(),
     'JsonDataLoadOptions, _': () => JsonDataLoadOptions(),
     'Link, _': () => Link(),

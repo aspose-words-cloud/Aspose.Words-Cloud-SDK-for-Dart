@@ -75,6 +75,11 @@ class GetHeaderFooterOfSectionRequest implements RequestBase {
   GetHeaderFooterOfSectionRequest(this.name, this.headerFooterIndex, this.sectionIndex, {this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.filterByType, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/sections/{sectionIndex}/headersfooters/{headerFooterIndex}';
     var _queryParams = <String, String>{};

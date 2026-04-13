@@ -68,6 +68,11 @@ class CompareDocumentOnlineRequest implements RequestBase {
   CompareDocumentOnlineRequest(this.document, this.compareData, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.fontsLocation, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/put/compareDocument';
     var _queryParams = <String, String>{};

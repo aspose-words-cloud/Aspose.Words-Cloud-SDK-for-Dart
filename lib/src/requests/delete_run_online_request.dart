@@ -75,6 +75,11 @@ class DeleteRunOnlineRequest implements RequestBase {
   DeleteRunOnlineRequest(this.document, this.paragraphPath, this.index, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/delete/{paragraphPath}/runs/{index}';
     var _queryParams = <String, String>{};

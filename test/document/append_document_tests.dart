@@ -71,6 +71,36 @@ class AppendDocumentTests
     expect(result.document?.fileName, 'TestAppendDocument.docx');
   }
 
+  /// Test for appending document job.
+  Future<void> testAppendDocumentJob() async
+  {
+    final remoteFileName = 'TestAppendDocument.docx';
+    await context.uploadFile(localFile, remoteDataFolder + '/' + remoteFileName);
+    final requestDocumentListDocumentEntries0FileReference = FileReference.fromRemoteFile(remoteDataFolder + '/' + remoteFileName);
+
+    final requestDocumentListDocumentEntries0 = DocumentEntry();
+    requestDocumentListDocumentEntries0.fileReference = requestDocumentListDocumentEntries0FileReference;
+    requestDocumentListDocumentEntries0.importFormatMode = DocumentEntry_ImportFormatModeEnum.keepSourceFormatting;
+
+    final requestDocumentListDocumentEntries = [
+      requestDocumentListDocumentEntries0];
+
+    final requestDocumentList = DocumentEntryList();
+    requestDocumentList.documentEntries = requestDocumentListDocumentEntries;
+
+    final request = AppendDocumentJobRequest(
+      remoteFileName,
+      requestDocumentList,
+      folder: remoteDataFolder,
+      destFileName: context.baseTestOutPath + '/' + remoteFileName
+    );
+
+    final jobHandler = await context.getApi().appendDocumentJob(request);
+    final result = await jobHandler.waitResult(const Duration(seconds: 3));
+    expect(result.document, isNotNull);
+    expect(result.document?.fileName, 'TestAppendDocument.docx');
+  }
+
   /// Test for appending document online.
   Future<void> testAppendDocumentOnline() async
   {
@@ -95,5 +125,32 @@ class AppendDocumentTests
     );
 
     await context.getApi().appendDocumentOnline(request);
+  }
+
+  /// Test for appending document online job.
+  Future<void> testAppendDocumentOnlineJob() async
+  {
+    final requestDocument = await context.loadBinaryFile(localFile);
+
+    final requestDocumentListDocumentEntries0FileReferenceStream = await context.loadBinaryFile(localFile);
+    final requestDocumentListDocumentEntries0FileReference = FileReference.fromLocalFile(requestDocumentListDocumentEntries0FileReferenceStream);
+
+    final requestDocumentListDocumentEntries0 = DocumentEntry();
+    requestDocumentListDocumentEntries0.fileReference = requestDocumentListDocumentEntries0FileReference;
+    requestDocumentListDocumentEntries0.importFormatMode = DocumentEntry_ImportFormatModeEnum.keepSourceFormatting;
+
+    final requestDocumentListDocumentEntries = [
+      requestDocumentListDocumentEntries0];
+
+    final requestDocumentList = DocumentEntryList();
+    requestDocumentList.documentEntries = requestDocumentListDocumentEntries;
+
+    final request = AppendDocumentOnlineJobRequest(
+      requestDocument,
+      requestDocumentList
+    );
+
+    final jobHandler = await context.getApi().appendDocumentOnlineJob(request);
+    await jobHandler.waitResult(const Duration(seconds: 3));
   }
 }

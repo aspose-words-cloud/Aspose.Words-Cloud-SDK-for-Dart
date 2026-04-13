@@ -74,6 +74,11 @@ class DeleteCustomXmlPartsRequest implements RequestBase {
   DeleteCustomXmlPartsRequest(this.name, {this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/customXmlParts';
     var _queryParams = <String, String>{};

@@ -81,6 +81,11 @@ class UpdateSectionPageSetupRequest implements RequestBase {
   UpdateSectionPageSetupRequest(this.name, this.sectionIndex, this.pageSetup, {this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/sections/{sectionIndex}/pageSetup';
     var _queryParams = <String, String>{};

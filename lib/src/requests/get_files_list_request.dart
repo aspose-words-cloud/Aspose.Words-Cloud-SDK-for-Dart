@@ -51,6 +51,11 @@ class GetFilesListRequest implements RequestBase {
   GetFilesListRequest(this.path, {this.storageName, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/storage/folder/{path}';
     var _queryParams = <String, String>{};

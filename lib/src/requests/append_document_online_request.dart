@@ -71,6 +71,11 @@ class AppendDocumentOnlineRequest implements RequestBase {
   AppendDocumentOnlineRequest(this.document, this.documentList, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/put/appendDocument';
     var _queryParams = <String, String>{};

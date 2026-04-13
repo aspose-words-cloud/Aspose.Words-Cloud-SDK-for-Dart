@@ -66,6 +66,11 @@ class GetTableCellFormatOnlineRequest implements RequestBase {
   GetTableCellFormatOnlineRequest(this.document, this.tableRowPath, this.index, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/get/{tableRowPath}/cells/{index}/cellformat';
     var _queryParams = <String, String>{};

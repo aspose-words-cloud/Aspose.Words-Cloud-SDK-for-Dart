@@ -81,6 +81,11 @@ class InsertTableCellRequest implements RequestBase {
   InsertTableCellRequest(this.name, this.cell, {this.tableRowPath, this.folder, this.storage, this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.destFileName, this.revisionAuthor, this.revisionDateTime, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/{name}/{tableRowPath}/cells';
     var _queryParams = <String, String>{};

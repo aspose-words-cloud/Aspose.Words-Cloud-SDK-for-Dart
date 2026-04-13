@@ -1,3 +1,9 @@
+## [26.4.0] - Aspose Words Cloud for Dart 26.4 Release Notes
+
+- Implemented jobs system to perform operations without an active connection to the server.
+- Added job operations: 'AppendDocumentJob', 'AppendDocumentOnlineJob', 'ConvertDocumentJob', 'ExecuteMailMergeJob', 'ExecuteMailMergeOnlineJob', 'SplitDocumentJob', 'SplitDocumentOnlineJob'.
+
+
 ## [26.3.0] - Aspose Words Cloud for Dart 26.3 Release Notes
 
 - Various stability and performance improvements.

@@ -63,6 +63,11 @@ class GetDocumentFieldNamesOnlineRequest implements RequestBase {
   GetDocumentFieldNamesOnlineRequest(this.template, {this.loadEncoding, this.password, this.encryptedPassword, this.openTypeSupport, this.useNonMergeFields, this.sendDataProgressCallback, this.receiveDataProgressCallback});
 
   @override
+  RequestBase getOriginalRequest() {
+    return this;
+  }
+
+  @override
   Future<ApiRequestData> createRequestData(final ApiClient _apiClient) async {
     var _path = '/words/online/get/mailMerge/FieldNames';
     var _queryParams = <String, String>{};
