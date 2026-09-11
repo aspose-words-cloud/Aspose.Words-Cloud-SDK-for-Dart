@@ -38,6 +38,15 @@ node('words-linux') {
             
             if (packageTesting) {
                 docker.image('dart:3.11.2').inside {
+                    withEnv([
+                    /* Override the pub cache directory to avoid: Creation failed, path = '/.pub-cache' */
+                    'PUB_CACHE=.pub-cache',
+                    /* set home to our current directory because HOME resolves to "/" for a
+                     * uid that is absent from the image's /etc/passwd, e.g.:
+                     * Creation failed, path = '/.pub-cache' (OS Error: Permission denied)
+                     */
+                    'HOME=.',
+                    ]) {
                     stage('prepare'){
                         sh "rm -rf lib"
                         sh "cp ./pubspec_package_testing.yaml ./pubspec.yaml"
@@ -58,10 +67,20 @@ node('words-linux') {
                             junit 'testReport.xml'
                         }
                     }
+                    }
                 } 
             }
             else if (needToBuild) {
                 docker.image('dart:3.11.2').inside {
+                    withEnv([
+                    /* Override the pub cache directory to avoid: Creation failed, path = '/.pub-cache' */
+                    'PUB_CACHE=.pub-cache',
+                    /* set home to our current directory because HOME resolves to "/" for a
+                     * uid that is absent from the image's /etc/passwd, e.g.:
+                     * Creation failed, path = '/.pub-cache' (OS Error: Permission denied)
+                     */
+                    'HOME=.',
+                    ]) {
                     stage('prepare'){
                         sh "dart pub get"
                         sh "dart pub global activate junitreport"
@@ -78,6 +97,7 @@ node('words-linux') {
                             sh "dart pub global run junitreport:tojunit --input testReport.json --output testReport.xml"
                             junit 'testReport.xml'
                         }
+                    }
                     }
                 } 
             }

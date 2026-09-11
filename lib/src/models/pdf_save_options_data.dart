@@ -149,6 +149,19 @@ class PdfSaveOptionsData extends FixedPageSaveOptionsData {
   set fontEmbeddingMode(PdfSaveOptionsData_FontEmbeddingModeEnum? val) => _fontEmbeddingMode = val;
 
 
+  /// Gets or sets a value determining  whether to generate scripts that emulate specific Microsoft Word form field behavior in PDF.
+  /// Default is false.
+  /// When this option is enabled, the exporter generates PDF JavaScript actions to emulate Microsoft Word
+  /// form field behavior, such as date and time form fields with formatting and validation rules.When set to true, supported behavior will be exported as PDF JavaScript actions.
+  /// When set to false, no form field scripts will be generated.Script execution depends on the PDF viewer. Some PDF viewers might ignore scripts, restrict script execution,
+  /// or require the user to enable JavaScript.JavaScript actions are prohibited by PDF/A-1, PDF/A-2 and PDF/A-3 compliance.
+  /// The false value will be used automatically in this case.
+  bool? _generateFormFieldScripts;
+
+  bool? get generateFormFieldScripts => _generateFormFieldScripts;
+  set generateFormFieldScripts(bool? val) => _generateFormFieldScripts = val;
+
+
   /// Gets or sets the option that controls how bookmarks in headers/footers are exported.
   /// The default value is Aspose.Words.Saving.HeaderFooterBookmarksExportMode.All.
   PdfSaveOptionsData_HeaderFooterBookmarksExportModeEnum? _headerFooterBookmarksExportMode;
@@ -556,6 +569,12 @@ class PdfSaveOptionsData extends FixedPageSaveOptionsData {
       fontEmbeddingMode = null;
     }
 
+    if (json.containsKey('GenerateFormFieldScripts')) {
+      generateFormFieldScripts = json['GenerateFormFieldScripts'] as bool;
+    } else {
+      generateFormFieldScripts = null;
+    }
+
     if (json.containsKey('HeaderFooterBookmarksExportMode')) {
       switch (json['HeaderFooterBookmarksExportMode'] as String) {
         case 'None': headerFooterBookmarksExportMode = PdfSaveOptionsData_HeaderFooterBookmarksExportModeEnum.none; break;
@@ -778,6 +797,10 @@ class PdfSaveOptionsData extends FixedPageSaveOptionsData {
       }
     }
 
+    if (generateFormFieldScripts != null) {
+      _result['GenerateFormFieldScripts'] = generateFormFieldScripts!;
+    }
+
     if (headerFooterBookmarksExportMode != null) {
       switch (headerFooterBookmarksExportMode!) {
         case PdfSaveOptionsData_HeaderFooterBookmarksExportModeEnum.none: _result['HeaderFooterBookmarksExportMode'] = 'None'; break;
@@ -901,6 +924,7 @@ class PdfSaveOptionsData extends FixedPageSaveOptionsData {
 
 
     encryptionDetails?.validate();
+
 
 
 

@@ -38,6 +38,14 @@ class XpsSaveOptionsData extends FixedPageSaveOptionsData {
   set bookmarksOutlineLevel(int? val) => _bookmarksOutlineLevel = val;
 
 
+  /// Gets or sets a compression level used to save document.
+  /// The default value is Normal.
+  XpsSaveOptionsData_CompressionLevelEnum? _compressionLevel;
+
+  XpsSaveOptionsData_CompressionLevelEnum? get compressionLevel => _compressionLevel;
+  set compressionLevel(XpsSaveOptionsData_CompressionLevelEnum? val) => _compressionLevel = val;
+
+
   /// Gets or sets the details for signing the output document.
   DigitalSignatureDetails? _digitalSignatureDetails;
 
@@ -234,6 +242,18 @@ class XpsSaveOptionsData extends FixedPageSaveOptionsData {
       bookmarksOutlineLevel = null;
     }
 
+    if (json.containsKey('CompressionLevel')) {
+      switch (json['CompressionLevel'] as String) {
+        case 'Normal': compressionLevel = XpsSaveOptionsData_CompressionLevelEnum.normal; break;
+        case 'Maximum': compressionLevel = XpsSaveOptionsData_CompressionLevelEnum.maximum; break;
+        case 'Fast': compressionLevel = XpsSaveOptionsData_CompressionLevelEnum.fast; break;
+        case 'SuperFast': compressionLevel = XpsSaveOptionsData_CompressionLevelEnum.superFast; break;
+        default: compressionLevel = null; break;
+      }
+    } else {
+      compressionLevel = null;
+    }
+
     if (json.containsKey('DigitalSignatureDetails')) {
       digitalSignatureDetails = ModelBase.createInstance< DigitalSignatureDetails >(json['DigitalSignatureDetails'] as Map<String, dynamic>);
     } else {
@@ -265,6 +285,16 @@ class XpsSaveOptionsData extends FixedPageSaveOptionsData {
     _result.addAll(super.serialize());
     if (bookmarksOutlineLevel != null) {
       _result['BookmarksOutlineLevel'] = bookmarksOutlineLevel!;
+    }
+
+    if (compressionLevel != null) {
+      switch (compressionLevel!) {
+        case XpsSaveOptionsData_CompressionLevelEnum.normal: _result['CompressionLevel'] = 'Normal'; break;
+        case XpsSaveOptionsData_CompressionLevelEnum.maximum: _result['CompressionLevel'] = 'Maximum'; break;
+        case XpsSaveOptionsData_CompressionLevelEnum.fast: _result['CompressionLevel'] = 'Fast'; break;
+        case XpsSaveOptionsData_CompressionLevelEnum.superFast: _result['CompressionLevel'] = 'SuperFast'; break;
+        default: break;
+      }
     }
 
     if (digitalSignatureDetails != null) {
@@ -309,4 +339,13 @@ class XpsSaveOptionsData extends FixedPageSaveOptionsData {
   }
 }
 
+/// Gets or sets a compression level used to save document.
+/// The default value is Normal.
+enum XpsSaveOptionsData_CompressionLevelEnum
+{ 
+  normal,
+  maximum,
+  fast,
+  superFast
+}
 

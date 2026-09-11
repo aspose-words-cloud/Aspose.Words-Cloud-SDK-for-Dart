@@ -1,3 +1,9 @@
+## [26.9.0] - Aspose Words Cloud for Dart 26.9 Release Notes
+
+- Added 'CompressionLevel' property for XpsSaveOptionsData class.
+- Added 'GenerateFormFieldScripts' property for PdfSaveOptionsData class.
+
+
 ## [26.6.0] - Aspose Words Cloud for Dart 26.6 Release Notes
 
 - Download file with chunks was fixed.

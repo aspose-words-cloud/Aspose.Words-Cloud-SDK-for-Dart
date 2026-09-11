@@ -199,6 +199,18 @@ class OpenXpsSaveOptionsData extends XpsSaveOptionsData {
       bookmarksOutlineLevel = null;
     }
 
+    if (json.containsKey('CompressionLevel')) {
+      switch (json['CompressionLevel'] as String) {
+        case 'Normal': compressionLevel = XpsSaveOptionsData_CompressionLevelEnum.normal; break;
+        case 'Maximum': compressionLevel = XpsSaveOptionsData_CompressionLevelEnum.maximum; break;
+        case 'Fast': compressionLevel = XpsSaveOptionsData_CompressionLevelEnum.fast; break;
+        case 'SuperFast': compressionLevel = XpsSaveOptionsData_CompressionLevelEnum.superFast; break;
+        default: compressionLevel = null; break;
+      }
+    } else {
+      compressionLevel = null;
+    }
+
     if (json.containsKey('DigitalSignatureDetails')) {
       digitalSignatureDetails = ModelBase.createInstance< DigitalSignatureDetails >(json['DigitalSignatureDetails'] as Map<String, dynamic>);
     } else {
