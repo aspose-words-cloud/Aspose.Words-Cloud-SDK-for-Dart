@@ -1,3 +1,8 @@
+## [26.10.0] - Aspose Words Cloud for Dart 26.10 Release Notes
+
+- Added 'AdvancedOptions' property for CompareData class.
+
+
 ## [26.9.0] - Aspose Words Cloud for Dart 26.9 Release Notes
 
 - Added 'CompressionLevel' property for XpsSaveOptionsData class.

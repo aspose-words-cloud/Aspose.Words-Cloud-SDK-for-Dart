@@ -30,6 +30,7 @@ library aspose_words_cloud;
 export 'src/api_exception.dart';
 export 'src/configuration.dart';
 export 'src/job_handler.dart';
+export 'src/models/advanced_compare_options.dart';
 export 'src/models/api_error.dart';
 export 'src/models/available_fonts_response.dart';
 export 'src/models/azw3_save_options_data.dart';

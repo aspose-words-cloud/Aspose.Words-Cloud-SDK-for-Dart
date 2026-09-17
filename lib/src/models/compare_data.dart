@@ -31,6 +31,13 @@ import '../../aspose_words_cloud.dart';
 
 /// Container class for compare documents.
 class CompareData implements ModelBase {
+  /// Gets or sets advanced compare options that might help to produce more precise comparison output.
+  AdvancedCompareOptions? _advancedOptions;
+
+  AdvancedCompareOptions? get advancedOptions => _advancedOptions;
+  set advancedOptions(AdvancedCompareOptions? val) => _advancedOptions = val;
+
+
   /// Gets or sets the initials of the author to use for revisions.
   String? _author;
 
@@ -81,6 +88,12 @@ class CompareData implements ModelBase {
       throw ApiException(400, 'Failed to deserialize CompareData data model.');
     }
 
+    if (json.containsKey('AdvancedOptions')) {
+      advancedOptions = ModelBase.createInstance< AdvancedCompareOptions >(json['AdvancedOptions'] as Map<String, dynamic>);
+    } else {
+      advancedOptions = null;
+    }
+
     if (json.containsKey('Author')) {
       author = json['Author'] as String;
     } else {
@@ -121,6 +134,10 @@ class CompareData implements ModelBase {
   @override
   Map<String, dynamic> serialize() {
     var _result = <String, dynamic>{};
+    if (advancedOptions != null) {
+      _result['AdvancedOptions'] = advancedOptions!.serialize();
+    }
+
     if (author != null) {
       _result['Author'] = author!;
     }
@@ -167,6 +184,11 @@ class CompareData implements ModelBase {
     {
         throw new ApiException(400, 'Property FileReference in CompareData is required.');
     }
+
+    advancedOptions?.validate();
+
+
+
 
     compareOptions?.validate();
 
