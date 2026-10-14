@@ -36,6 +36,7 @@ abstract class ModelBase {
   void validate();
 
   static final Map<String, ModelBase Function()> _modelsFactory = <String, ModelBase Function()> {
+    'AdvancedCompareOptions, _': () => AdvancedCompareOptions(),
     'ApiError, _': () => ApiError(),
     'AvailableFontsResponse, _': () => AvailableFontsResponse(),
     'Azw3SaveOptionsData, _': () => Azw3SaveOptionsData(),

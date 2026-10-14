@@ -14,7 +14,7 @@ properties([
 def needToBuild = false
 def packageTesting = false
 
-node('words-linux') {
+node('sdk-linux') {
     cleanWs()
     dir('dart') {
         try {

@@ -35,8 +35,6 @@ import 'package:test/test.dart';
 import './batch_tests.dart';
 import './bookmark/bookmark_tests.dart';
 import './compatibility/compatibility_tests.dart';
-import './document_properties/document_properties_tests.dart';
-import './document_protection/document_protection_tests.dart';
 import './document/append_document_tests.dart';
 import './document/comment_tests.dart';
 import './document/compare_document_tests.dart';
@@ -51,6 +49,8 @@ import './document/password_encryption_tests.dart';
 import './document/revisions_tests.dart';
 import './document/signature_tests.dart';
 import './document/split_document_to_format_tests.dart';
+import './document_properties/document_properties_tests.dart';
+import './document_protection/document_protection_tests.dart';
 import './drawing/drawing_objects_tests.dart';
 import './encoding_tests.dart';
 import './examples_tests.dart';
@@ -114,6 +114,13 @@ void main() {
     test('TestProgressSendReceive', () async => await BatchTests(testContext).testProgressSendReceive());
   });
 
+  group('AppendDocument', () {
+    test('AppendDocument', () async => await AppendDocumentTests(testContext).testAppendDocument());
+    test('AppendDocumentJob', () async => await AppendDocumentTests(testContext).testAppendDocumentJob());
+    test('AppendDocumentOnline', () async => await AppendDocumentTests(testContext).testAppendDocumentOnline());
+    test('AppendDocumentOnlineJob', () async => await AppendDocumentTests(testContext).testAppendDocumentOnlineJob());
+  });
+
   group('Bookmark', () {
     test('GetBookmarks', () async => await BookmarkTests(testContext).testGetBookmarks());
     test('GetBookmarksOnline', () async => await BookmarkTests(testContext).testGetBookmarksOnline());
@@ -129,16 +136,9 @@ void main() {
     test('InsertBookmarkOnline', () async => await BookmarkTests(testContext).testInsertBookmarkOnline());
   });
 
-  group('Compatibility', () {
-    test('OptimizeDocument', () async => await CompatibilityTests(testContext).testOptimizeDocument());
-    test('OptimizeDocumentOnline', () async => await CompatibilityTests(testContext).testOptimizeDocumentOnline());
-  });
-
-  group('AppendDocument', () {
-    test('AppendDocument', () async => await AppendDocumentTests(testContext).testAppendDocument());
-    test('AppendDocumentJob', () async => await AppendDocumentTests(testContext).testAppendDocumentJob());
-    test('AppendDocumentOnline', () async => await AppendDocumentTests(testContext).testAppendDocumentOnline());
-    test('AppendDocumentOnlineJob', () async => await AppendDocumentTests(testContext).testAppendDocumentOnlineJob());
+  group('BuildReport', () {
+    test('BuildReportOnline', () async => await BuildReportTests(testContext).testBuildReportOnline());
+    test('BuildReport', () async => await BuildReportTests(testContext).testBuildReport());
   });
 
   group('Comment', () {
@@ -161,6 +161,11 @@ void main() {
     test('CompareDocumentOnline', () async => await CompareDocumentTests(testContext).testCompareDocumentOnline());
     test('CompareTwoDocumentOnline', () async => await CompareDocumentTests(testContext).testCompareTwoDocumentOnline());
     test('CompareDocumentWithPassword', () async => await CompareDocumentTests(testContext).testCompareDocumentWithPassword());
+  });
+
+  group('Compatibility', () {
+    test('OptimizeDocument', () async => await CompatibilityTests(testContext).testOptimizeDocument());
+    test('OptimizeDocumentOnline', () async => await CompatibilityTests(testContext).testOptimizeDocumentOnline());
   });
 
   group('CompressDocument', () {
@@ -199,50 +204,6 @@ void main() {
     test('CreateDocument', () async => await DocumentTests(testContext).testCreateDocument());
   });
 
-  group('DocumentStatistics', () {
-    test('GetDocumentStatistics', () async => await DocumentStatisticsTests(testContext).testGetDocumentStatistics());
-    test('GetDocumentStatisticsOnline', () async => await DocumentStatisticsTests(testContext).testGetDocumentStatisticsOnline());
-  });
-
-  group('DocumentWithFormat', () {
-    test('GetDocumentWithFormat', () async => await DocumentWithFormatTests(testContext).testGetDocumentWithFormat());
-    test('GetDocumentWithFormatAndOutPath', () async => await DocumentWithFormatTests(testContext).testGetDocumentWithFormatAndOutPath());
-  });
-
-  group('LoadWebDocument', () {
-    test('LoadWebDocument', () async => await LoadWebDocumentTests(testContext).testLoadWebDocument());
-    test('LoadWebDocumentOnline', () async => await LoadWebDocumentTests(testContext).testLoadWebDocumentOnline());
-  });
-
-  group('PasswordEncryption', () {
-    test('GetPublicKey', () async => await PasswordEncryptionTests(testContext).testGetPublicKey());
-  });
-
-  group('Revisions', () {
-    test('AcceptAllRevisions', () async => await RevisionsTests(testContext).testAcceptAllRevisions());
-    test('AcceptAllRevisionsOnline', () async => await RevisionsTests(testContext).testAcceptAllRevisionsOnline());
-    test('RejectAllRevisions', () async => await RevisionsTests(testContext).testRejectAllRevisions());
-    test('RejectAllRevisionsOnline', () async => await RevisionsTests(testContext).testRejectAllRevisionsOnline());
-    test('GetAllRevisions', () async => await RevisionsTests(testContext).testGetAllRevisions());
-    test('GetAllRevisionsOnline', () async => await RevisionsTests(testContext).testGetAllRevisionsOnline());
-  });
-
-  group('Signature', () {
-    test('GetSignatures', () async => await SignatureTests(testContext).testGetSignatures());
-    test('GetSignaturesOnline', () async => await SignatureTests(testContext).testGetSignaturesOnline());
-    test('RemoveAllSignatures', () async => await SignatureTests(testContext).testRemoveAllSignatures());
-    test('RemoveAllSignaturesOnline', () async => await SignatureTests(testContext).testRemoveAllSignaturesOnline());
-    test('SignDocument', () async => await SignatureTests(testContext).testSignDocument());
-    test('SignDocumentOnline', () async => await SignatureTests(testContext).testSignDocumentOnline());
-  });
-
-  group('SplitDocumentToFormat', () {
-    test('SplitDocument', () async => await SplitDocumentToFormatTests(testContext).testSplitDocument());
-    test('SplitDocumentJob', () async => await SplitDocumentToFormatTests(testContext).testSplitDocumentJob());
-    test('SplitDocumentOnline', () async => await SplitDocumentToFormatTests(testContext).testSplitDocumentOnline());
-    test('SplitDocumentOnlineJob', () async => await SplitDocumentToFormatTests(testContext).testSplitDocumentOnlineJob());
-  });
-
   group('DocumentProperties', () {
     test('GetDocumentProperties', () async => await DocumentPropertiesTests(testContext).testGetDocumentProperties());
     test('GetDocumentPropertiesOnline', () async => await DocumentPropertiesTests(testContext).testGetDocumentPropertiesOnline());
@@ -261,6 +222,16 @@ void main() {
     test('GetDocumentProtectionOnline', () async => await DocumentProtectionTests(testContext).testGetDocumentProtectionOnline());
     test('DeleteUnprotectDocument', () async => await DocumentProtectionTests(testContext).testDeleteUnprotectDocument());
     test('DeleteUnprotectDocumentOnline', () async => await DocumentProtectionTests(testContext).testDeleteUnprotectDocumentOnline());
+  });
+
+  group('DocumentStatistics', () {
+    test('GetDocumentStatistics', () async => await DocumentStatisticsTests(testContext).testGetDocumentStatistics());
+    test('GetDocumentStatisticsOnline', () async => await DocumentStatisticsTests(testContext).testGetDocumentStatisticsOnline());
+  });
+
+  group('DocumentWithFormat', () {
+    test('GetDocumentWithFormat', () async => await DocumentWithFormatTests(testContext).testGetDocumentWithFormat());
+    test('GetDocumentWithFormatAndOutPath', () async => await DocumentWithFormatTests(testContext).testGetDocumentWithFormatAndOutPath());
   });
 
   group('DrawingObjects', () {
@@ -288,6 +259,23 @@ void main() {
     test('UpdateDrawingObject', () async => await DrawingObjectsTests(testContext).testUpdateDrawingObject());
     test('UpdateDrawingObjectOnline', () async => await DrawingObjectsTests(testContext).testUpdateDrawingObjectOnline());
     test('UpdateDrawingObjectWithoutNodePath', () async => await DrawingObjectsTests(testContext).testUpdateDrawingObjectWithoutNodePath());
+  });
+
+  group('ExecuteMailMerge', () {
+    test('ExecuteMailMergeOnline', () async => await ExecuteMailMergeTests(testContext).testExecuteMailMergeOnline());
+    test('ExecuteMailMergeOnlineJob', () async => await ExecuteMailMergeTests(testContext).testExecuteMailMergeOnlineJob());
+    test('ExecuteMailMerge', () async => await ExecuteMailMergeTests(testContext).testExecuteMailMerge());
+    test('ExecuteMailMergeJob', () async => await ExecuteMailMergeTests(testContext).testExecuteMailMergeJob());
+  });
+
+  group('ExecuteTemplate', () {
+    test('ExecuteTemplate', () async => await ExecuteTemplateTests(testContext).testExecuteTemplate());
+    test('ExecuteTemplateOnline', () async => await ExecuteTemplateTests(testContext).testExecuteTemplateOnline());
+  });
+
+  group('ExecuteTemplateWithFieldOptions', () {
+    test('ExecuteTemplateWithFieldOptions', () async => await ExecuteTemplateWithFieldOptionsTests(testContext).testExecuteTemplateWithFieldOptions());
+    test('ExecuteTemplateOnlineWithFieldOptions', () async => await ExecuteTemplateWithFieldOptionsTests(testContext).testExecuteTemplateOnlineWithFieldOptions());
   });
 
   group('Field', () {
@@ -318,22 +306,20 @@ void main() {
     test('UpdateDocumentFieldsOnline', () async => await FieldTests(testContext).testUpdateDocumentFieldsOnline());
   });
 
-  group('FormField', () {
-    test('UpdateFormField', () async => await FormFieldTests(testContext).testUpdateFormField());
-    test('UpdateFormFieldOnline', () async => await FormFieldTests(testContext).testUpdateFormFieldOnline());
-    test('UpdateFormFieldWithoutNodePath', () async => await FormFieldTests(testContext).testUpdateFormFieldWithoutNodePath());
-    test('GetFormField', () async => await FormFieldTests(testContext).testGetFormField());
-    test('GetFormFieldOnline', () async => await FormFieldTests(testContext).testGetFormFieldOnline());
-    test('GetFormFieldWithoutNodePath', () async => await FormFieldTests(testContext).testGetFormFieldWithoutNodePath());
-    test('GetFormFields', () async => await FormFieldTests(testContext).testGetFormFields());
-    test('GetFormFieldsOnline', () async => await FormFieldTests(testContext).testGetFormFieldsOnline());
-    test('GetFormFieldsWithoutNodePath', () async => await FormFieldTests(testContext).testGetFormFieldsWithoutNodePath());
-    test('InsertFormField', () async => await FormFieldTests(testContext).testInsertFormField());
-    test('InsertFormFieldOnline', () async => await FormFieldTests(testContext).testInsertFormFieldOnline());
-    test('InsertFormFieldWithoutNodePath', () async => await FormFieldTests(testContext).testInsertFormFieldWithoutNodePath());
-    test('DeleteFormField', () async => await FormFieldTests(testContext).testDeleteFormField());
-    test('DeleteFormFieldOnline', () async => await FormFieldTests(testContext).testDeleteFormFieldOnline());
-    test('DeleteFormFieldWithoutNodePath', () async => await FormFieldTests(testContext).testDeleteFormFieldWithoutNodePath());
+  group('File', () {
+    test('UploadFile', () async => await FileTests(testContext).testUploadFile());
+    test('CopyFile', () async => await FileTests(testContext).testCopyFile());
+    test('MoveFile', () async => await FileTests(testContext).testMoveFile());
+    test('DeleteFile', () async => await FileTests(testContext).testDeleteFile());
+    test('DownloadFile', () async => await FileTests(testContext).testDownloadFile());
+  });
+
+  group('Folder', () {
+    test('CreateFolder', () async => await FolderTests(testContext).testCreateFolder());
+    test('DeleteFolder', () async => await FolderTests(testContext).testDeleteFolder());
+    test('GetFilesList', () async => await FolderTests(testContext).testGetFilesList());
+    test('CopyFolder', () async => await FolderTests(testContext).testCopyFolder());
+    test('MoveFolder', () async => await FolderTests(testContext).testMoveFolder());
   });
 
   group('Font', () {
@@ -357,6 +343,24 @@ void main() {
     test('UpdateFootnote', () async => await FootnoteTests(testContext).testUpdateFootnote());
     test('UpdateFootnoteOnline', () async => await FootnoteTests(testContext).testUpdateFootnoteOnline());
     test('UpdateFootnoteWithoutNodePath', () async => await FootnoteTests(testContext).testUpdateFootnoteWithoutNodePath());
+  });
+
+  group('FormField', () {
+    test('UpdateFormField', () async => await FormFieldTests(testContext).testUpdateFormField());
+    test('UpdateFormFieldOnline', () async => await FormFieldTests(testContext).testUpdateFormFieldOnline());
+    test('UpdateFormFieldWithoutNodePath', () async => await FormFieldTests(testContext).testUpdateFormFieldWithoutNodePath());
+    test('GetFormField', () async => await FormFieldTests(testContext).testGetFormField());
+    test('GetFormFieldOnline', () async => await FormFieldTests(testContext).testGetFormFieldOnline());
+    test('GetFormFieldWithoutNodePath', () async => await FormFieldTests(testContext).testGetFormFieldWithoutNodePath());
+    test('GetFormFields', () async => await FormFieldTests(testContext).testGetFormFields());
+    test('GetFormFieldsOnline', () async => await FormFieldTests(testContext).testGetFormFieldsOnline());
+    test('GetFormFieldsWithoutNodePath', () async => await FormFieldTests(testContext).testGetFormFieldsWithoutNodePath());
+    test('InsertFormField', () async => await FormFieldTests(testContext).testInsertFormField());
+    test('InsertFormFieldOnline', () async => await FormFieldTests(testContext).testInsertFormFieldOnline());
+    test('InsertFormFieldWithoutNodePath', () async => await FormFieldTests(testContext).testInsertFormFieldWithoutNodePath());
+    test('DeleteFormField', () async => await FormFieldTests(testContext).testDeleteFormField());
+    test('DeleteFormFieldOnline', () async => await FormFieldTests(testContext).testDeleteFormFieldOnline());
+    test('DeleteFormFieldWithoutNodePath', () async => await FormFieldTests(testContext).testDeleteFormFieldWithoutNodePath());
   });
 
   group('HeaderFooter', () {
@@ -398,26 +402,14 @@ void main() {
     test('InsertListOnline', () async => await ListsTests(testContext).testInsertListOnline());
   });
 
+  group('LoadWebDocument', () {
+    test('LoadWebDocument', () async => await LoadWebDocumentTests(testContext).testLoadWebDocument());
+    test('LoadWebDocumentOnline', () async => await LoadWebDocumentTests(testContext).testLoadWebDocumentOnline());
+  });
+
   group('Macros', () {
     test('DeleteMacros', () async => await MacrosTests(testContext).testDeleteMacros());
     test('DeleteMacrosOnline', () async => await MacrosTests(testContext).testDeleteMacrosOnline());
-  });
-
-  group('ExecuteMailMerge', () {
-    test('ExecuteMailMergeOnline', () async => await ExecuteMailMergeTests(testContext).testExecuteMailMergeOnline());
-    test('ExecuteMailMergeOnlineJob', () async => await ExecuteMailMergeTests(testContext).testExecuteMailMergeOnlineJob());
-    test('ExecuteMailMerge', () async => await ExecuteMailMergeTests(testContext).testExecuteMailMerge());
-    test('ExecuteMailMergeJob', () async => await ExecuteMailMergeTests(testContext).testExecuteMailMergeJob());
-  });
-
-  group('ExecuteTemplate', () {
-    test('ExecuteTemplate', () async => await ExecuteTemplateTests(testContext).testExecuteTemplate());
-    test('ExecuteTemplateOnline', () async => await ExecuteTemplateTests(testContext).testExecuteTemplateOnline());
-  });
-
-  group('ExecuteTemplateWithFieldOptions', () {
-    test('ExecuteTemplateWithFieldOptions', () async => await ExecuteTemplateWithFieldOptionsTests(testContext).testExecuteTemplateWithFieldOptions());
-    test('ExecuteTemplateOnlineWithFieldOptions', () async => await ExecuteTemplateWithFieldOptionsTests(testContext).testExecuteTemplateOnlineWithFieldOptions());
   });
 
   group('MailMergeFileds', () {
@@ -503,6 +495,10 @@ void main() {
     test('DeleteParagraphTabStopWithoutNodePath', () async => await ParagraphTests(testContext).testDeleteParagraphTabStopWithoutNodePath());
   });
 
+  group('PasswordEncryption', () {
+    test('GetPublicKey', () async => await PasswordEncryptionTests(testContext).testGetPublicKey());
+  });
+
   group('Range', () {
     test('GetRangeText', () async => await RangeTests(testContext).testGetRangeText());
     test('GetRangeTextOnline', () async => await RangeTests(testContext).testGetRangeTextOnline());
@@ -516,9 +512,13 @@ void main() {
     test('TranslateNodeIdOnline', () async => await RangeTests(testContext).testTranslateNodeIdOnline());
   });
 
-  group('BuildReport', () {
-    test('BuildReportOnline', () async => await BuildReportTests(testContext).testBuildReportOnline());
-    test('BuildReport', () async => await BuildReportTests(testContext).testBuildReport());
+  group('Revisions', () {
+    test('AcceptAllRevisions', () async => await RevisionsTests(testContext).testAcceptAllRevisions());
+    test('AcceptAllRevisionsOnline', () async => await RevisionsTests(testContext).testAcceptAllRevisionsOnline());
+    test('RejectAllRevisions', () async => await RevisionsTests(testContext).testRejectAllRevisions());
+    test('RejectAllRevisionsOnline', () async => await RevisionsTests(testContext).testRejectAllRevisionsOnline());
+    test('GetAllRevisions', () async => await RevisionsTests(testContext).testGetAllRevisions());
+    test('GetAllRevisionsOnline', () async => await RevisionsTests(testContext).testGetAllRevisionsOnline());
   });
 
   group('Run', () {
@@ -544,20 +544,20 @@ void main() {
     test('LinkHeaderFootersToPrevious', () async => await SectionTests(testContext).testLinkHeaderFootersToPrevious());
   });
 
-  group('File', () {
-    test('UploadFile', () async => await FileTests(testContext).testUploadFile());
-    test('CopyFile', () async => await FileTests(testContext).testCopyFile());
-    test('MoveFile', () async => await FileTests(testContext).testMoveFile());
-    test('DeleteFile', () async => await FileTests(testContext).testDeleteFile());
-    test('DownloadFile', () async => await FileTests(testContext).testDownloadFile());
+  group('Signature', () {
+    test('GetSignatures', () async => await SignatureTests(testContext).testGetSignatures());
+    test('GetSignaturesOnline', () async => await SignatureTests(testContext).testGetSignaturesOnline());
+    test('RemoveAllSignatures', () async => await SignatureTests(testContext).testRemoveAllSignatures());
+    test('RemoveAllSignaturesOnline', () async => await SignatureTests(testContext).testRemoveAllSignaturesOnline());
+    test('SignDocument', () async => await SignatureTests(testContext).testSignDocument());
+    test('SignDocumentOnline', () async => await SignatureTests(testContext).testSignDocumentOnline());
   });
 
-  group('Folder', () {
-    test('CreateFolder', () async => await FolderTests(testContext).testCreateFolder());
-    test('DeleteFolder', () async => await FolderTests(testContext).testDeleteFolder());
-    test('GetFilesList', () async => await FolderTests(testContext).testGetFilesList());
-    test('CopyFolder', () async => await FolderTests(testContext).testCopyFolder());
-    test('MoveFolder', () async => await FolderTests(testContext).testMoveFolder());
+  group('SplitDocumentToFormat', () {
+    test('SplitDocument', () async => await SplitDocumentToFormatTests(testContext).testSplitDocument());
+    test('SplitDocumentJob', () async => await SplitDocumentToFormatTests(testContext).testSplitDocumentJob());
+    test('SplitDocumentOnline', () async => await SplitDocumentToFormatTests(testContext).testSplitDocumentOnline());
+    test('SplitDocumentOnlineJob', () async => await SplitDocumentToFormatTests(testContext).testSplitDocumentOnlineJob());
   });
 
   group('StructuredDocumentTag', () {
