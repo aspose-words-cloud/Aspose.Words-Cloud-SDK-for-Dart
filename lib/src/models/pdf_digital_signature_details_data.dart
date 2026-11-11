@@ -84,6 +84,7 @@ class PdfDigitalSignatureDetailsData implements ModelBase {
         case 'Sha384': hashAlgorithm = PdfDigitalSignatureDetailsData_HashAlgorithmEnum.sha384; break;
         case 'Sha512': hashAlgorithm = PdfDigitalSignatureDetailsData_HashAlgorithmEnum.sha512; break;
         case 'RipeMD160': hashAlgorithm = PdfDigitalSignatureDetailsData_HashAlgorithmEnum.ripeMD160; break;
+        case 'Auto': hashAlgorithm = PdfDigitalSignatureDetailsData_HashAlgorithmEnum.auto; break;
         default: hashAlgorithm = null; break;
       }
     } else {
@@ -122,6 +123,7 @@ class PdfDigitalSignatureDetailsData implements ModelBase {
         case PdfDigitalSignatureDetailsData_HashAlgorithmEnum.sha384: _result['HashAlgorithm'] = 'Sha384'; break;
         case PdfDigitalSignatureDetailsData_HashAlgorithmEnum.sha512: _result['HashAlgorithm'] = 'Sha512'; break;
         case PdfDigitalSignatureDetailsData_HashAlgorithmEnum.ripeMD160: _result['HashAlgorithm'] = 'RipeMD160'; break;
+        case PdfDigitalSignatureDetailsData_HashAlgorithmEnum.auto: _result['HashAlgorithm'] = 'Auto'; break;
         default: break;
       }
     }
@@ -155,6 +157,7 @@ enum PdfDigitalSignatureDetailsData_HashAlgorithmEnum
   sha256,
   sha384,
   sha512,
-  ripeMD160
+  ripeMD160,
+  auto
 }
 
