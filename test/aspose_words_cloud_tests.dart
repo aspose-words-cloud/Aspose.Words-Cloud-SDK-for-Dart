@@ -253,6 +253,8 @@ void main() {
     test('InsertDrawingObject', () async => await DrawingObjectsTests(testContext).testInsertDrawingObject());
     test('InsertDrawingObjectOnline', () async => await DrawingObjectsTests(testContext).testInsertDrawingObjectOnline());
     test('InsertDrawingObjectWithoutNodePath', () async => await DrawingObjectsTests(testContext).testInsertDrawingObjectWithoutNodePath());
+    test('InsertDrawingObjectByReference', () async => await DrawingObjectsTests(testContext).testInsertDrawingObjectByReference());
+    test('InsertDrawingObjectByReferenceOnline', () async => await DrawingObjectsTests(testContext).testInsertDrawingObjectByReferenceOnline());
     test('DeleteDrawingObject', () async => await DrawingObjectsTests(testContext).testDeleteDrawingObject());
     test('DeleteDrawingObjectOnline', () async => await DrawingObjectsTests(testContext).testDeleteDrawingObjectOnline());
     test('DeleteDrawingObjectWithoutNodePath', () async => await DrawingObjectsTests(testContext).testDeleteDrawingObjectWithoutNodePath());
