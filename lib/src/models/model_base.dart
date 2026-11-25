@@ -96,6 +96,7 @@ abstract class ModelBase {
     'DrawingObject, _': () => DrawingObject(),
     'DrawingObjectCollection, _': () => DrawingObjectCollection(),
     'DrawingObjectInsert, _': () => DrawingObjectInsert(),
+    'DrawingObjectInsertData, _': () => DrawingObjectInsertData(),
     'DrawingObjectLink, _': () => DrawingObjectLink(),
     'DrawingObjectResponse, _': () => DrawingObjectResponse(),
     'DrawingObjectsResponse, _': () => DrawingObjectsResponse(),

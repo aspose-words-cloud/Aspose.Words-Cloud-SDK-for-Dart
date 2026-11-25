@@ -1158,6 +1158,18 @@ class WordsApi {
     return await _apiClient.call(request) as DrawingObjectResponse;
   }
 
+  /// Inserts a new DrawingObject to the document node. The image is passed by reference:
+  /// a storage path in the document folder or its subfolders, an HTTP(S) URL, or a request part.
+  Future< DrawingObjectResponse > insertDrawingObjectByReference(InsertDrawingObjectByReferenceRequest request) async {
+    return await _apiClient.call(request) as DrawingObjectResponse;
+  }
+
+  /// Inserts a new DrawingObject to the document node. The image is passed by reference:
+  /// a storage path in the document folder or its subfolders, an HTTP(S) URL, or a request part.
+  Future< InsertDrawingObjectByReferenceOnlineResponse > insertDrawingObjectByReferenceOnline(InsertDrawingObjectByReferenceOnlineRequest request) async {
+    return await _apiClient.call(request) as InsertDrawingObjectByReferenceOnlineResponse;
+  }
+
   /// Inserts a new DrawingObject to the document node.
   Future< InsertDrawingObjectOnlineResponse > insertDrawingObjectOnline(InsertDrawingObjectOnlineRequest request) async {
     return await _apiClient.call(request) as InsertDrawingObjectOnlineResponse;
