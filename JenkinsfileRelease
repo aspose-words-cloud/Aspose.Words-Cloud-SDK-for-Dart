@@ -1,39 +1,70 @@
-parameters {
-    string(name: 'tagVersion', description: 'new version number for tag')
-}
+@Library('jenkins-shared-lib') _
 
-def makerelease() {
-    try {
-        stage('merge'){
-            checkout([$class: 'GitSCM', branches: [[name: '*/release']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'LocalBranch', localBranch: "**"]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '361885ba-9425-4230-950e-0af201d90547', url: 'https://git.auckland.dynabic.com/words-cloud/words-cloud-dart.git']]])
-            sh "git config user.email 'jenkins.aspose@gmail.com'"
-            sh "git config user.name 'jenkins'"
-            sh "git checkout --merge release"
-            sh "git reset --hard origin/release"
-            sh "git merge --no-ff --allow-unrelated-histories origin/master"
-            sh "git diff --name-status"
-            sh 'git commit -am "Merged master branch to release" || exit 0'
-            withCredentials([usernamePassword(credentialsId: '361885ba-9425-4230-950e-0af201d90547', passwordVariable: 'gitPass', usernameVariable: 'gitUsername')]) {
-                sh "git push https://$gitUsername:$gitPass@git.auckland.dynabic.com/words-cloud/words-cloud-dart.git release"
-            }
-        }
-
-        stage('tag'){
-            checkout([$class: 'GitSCM', branches: [[name: '*/release']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'LocalBranch', localBranch: "**"]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '361885ba-9425-4230-950e-0af201d90547', url: 'https://git.auckland.dynabic.com/words-cloud/words-cloud-dart.git']]])
-            sh "git config user.email \"jenkins.aspose@gmail.com\""
-            sh "git config user.name \"jenkins\""
-            sh "git tag -a ${tagVersion} -m 'version ${tagVersion}' | exit 0"
-            
-            withCredentials([usernamePassword(credentialsId: '361885ba-9425-4230-950e-0af201d90547', passwordVariable: 'gitPass', usernameVariable: 'gitUsername')]) {
-                sh "git push https://$gitUsername:$gitPass@git.auckland.dynabic.com/words-cloud/words-cloud-dart.git ${tagVersion}"
-            }
-        }
-    } finally {
-        deleteDir()
+// words-dart-pub-credentials: Secret file containing pub-credentials.json for a pub.dev uploader.
+// Shared Git, GitHub and production test credentials are documented in sdkRelease.groovy.
+def getPackageStatus(String version) {
+    return withEnv(["PUB_VERSION_URL=https://pub.dev/api/packages/aspose_words_cloud/versions/${version}.0"]) {
+        return sh(script: '''
+            curl --silent --show-error --connect-timeout 30 --max-time 180 \
+                --output /dev/null --write-out '%{http_code}' "$PUB_VERSION_URL"
+        ''', returnStdout: true).trim()
     }
 }
 
-node('sdk-linux') {
-    cleanWs()
-    makerelease()
+def publishPackage(boolean dryRun) {
+    def pubspec = readYaml file: 'pubspec.yaml'
+    def expectedVersion = "${env.RELEASE_VERSION}.0"
+    if (pubspec.name != 'aspose_words_cloud' || pubspec.version != expectedVersion) {
+        error("pubspec.yaml must declare aspose_words_cloud version ${expectedVersion}.")
+    }
+
+    withPubCredentials {
+        sh "dart pub publish ${dryRun ? '--dry-run' : '--force'} </dev/null"
+    }
 }
+
+// Use an isolated, writable credentials copy for token refresh in both modes.
+def withPubCredentials(Closure body) {
+    def publishDir = "${pwd(tmp: true)}/dart-publish"
+    try {
+        return timeout(time: 10, unit: 'MINUTES') {
+            docker.image('dart:3.11.2').inside {
+                withEnv(["PUB_CACHE=${publishDir}/cache", "XDG_CONFIG_HOME=${publishDir}/config"]) {
+                    withCredentials([file(credentialsId: 'words-dart-pub-credentials', variable: 'PUB_CREDENTIALS_FILE')]) {
+                        sh '''
+                            set +x
+                            umask 077
+                            mkdir -p "$PUB_CACHE" "$XDG_CONFIG_HOME/dart"
+                            cp "$PUB_CREDENTIALS_FILE" "$XDG_CONFIG_HOME/dart/pub-credentials.json"
+                            chmod 600 "$XDG_CONFIG_HOME/dart/pub-credentials.json"
+                        '''
+                        def loginOutput = timeout(time: 1, unit: 'MINUTES') {
+                            sh(script: 'dart pub login </dev/null', returnStdout: true)
+                        }
+                        // pub login can report broken credentials as a warning and still exit successfully.
+                        if (!loginOutput.contains('You are already logged in as ') && !loginOutput.contains('You are now logged in as ')) {
+                            error('pub.dev credential verification failed. Replace words-dart-pub-credentials with valid OAuth credentials.')
+                        }
+                        echo loginOutput.trim()
+                        body()
+                    }
+                }
+            }
+        }
+    } finally {
+        dir(publishDir) {
+            deleteDir()
+        }
+    }
+}
+
+sdkRelease(
+    localRepoUrl: 'https://git.auckland.dynabic.com/words-cloud/words-cloud-dart.git',
+    githubRepoApi: 'https://api.github.com/repos/aspose-words-cloud/Aspose.Words-Cloud-SDK-for-Dart',
+    testJob: 'words-dart-sdk',
+    getPackageStatus: { String version -> getPackageStatus(version) },
+    publishPackage: { boolean dryRun -> publishPackage(dryRun) },
+    getTagName: { String version -> version },
+    getReleaseName: { String version -> version },
+    getReleaseFiles: { String version -> [] }
+)

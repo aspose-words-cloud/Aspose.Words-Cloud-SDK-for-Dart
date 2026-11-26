@@ -135,6 +135,7 @@ class InsertDrawingObjectOnlineRequest implements RequestBase {
       if (_formBody != null) {
         _bodyParts.add(_formBody);
       }
+      drawingObject!.getFilesContent(_fileContentParts);
     }
     else {
       throw ApiException(400, 'Parameter drawingObject is required.');

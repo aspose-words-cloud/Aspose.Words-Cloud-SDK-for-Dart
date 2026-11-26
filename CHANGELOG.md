@@ -1,3 +1,8 @@
+## [26.12.0] - Aspose Words Cloud for Dart 26.12 Release Notes
+
+- Added 'InsertDrawingObjectByReference' method to insert a drawing object with the image passed as 'FileReference': a storage path in the document folder or its subfolders, a public HTTP(S) URL, or a request part.
+
+
 ## [26.10.0] - Aspose Words Cloud for Dart 26.10 Release Notes
 
 - Added 'AdvancedOptions' property for CompareData class.

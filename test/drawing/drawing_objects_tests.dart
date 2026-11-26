@@ -347,6 +347,63 @@ class DrawingObjectsTests
     await context.getApi().insertDrawingObject(request);
   }
 
+  /// Test for adding drawing object with the image from the storage.
+  Future<void> testInsertDrawingObjectByReference() async
+  {
+    final remoteFileName = 'TestInsertDrawingObjectByReference.docx';
+    final remoteImagePath = remoteDataFolder + '/TestInsertDrawingObjectByReference.png';
+    await context.uploadFile(localFile, remoteDataFolder + '/' + remoteFileName);
+
+    await context.uploadFile('Common/aspose-cloud.png', remoteImagePath);
+    final requestDrawingObjectImageReference = FileReference.fromRemoteFile(remoteImagePath);
+
+    final requestDrawingObject = DrawingObjectInsertData();
+    requestDrawingObject.height = 0;
+    requestDrawingObject.left = 0;
+    requestDrawingObject.top = 0;
+    requestDrawingObject.width = 0;
+    requestDrawingObject.relativeHorizontalPosition = DrawingObjectInsert_RelativeHorizontalPositionEnum.margin;
+    requestDrawingObject.relativeVerticalPosition = DrawingObjectInsert_RelativeVerticalPositionEnum.margin;
+    requestDrawingObject.wrapType = DrawingObjectInsert_WrapTypeEnum.inline;
+    requestDrawingObject.imageReference = requestDrawingObjectImageReference;
+
+    final request = InsertDrawingObjectByReferenceRequest(
+      remoteFileName,
+      requestDrawingObject,
+      nodePath: '',
+      folder: remoteDataFolder
+    );
+
+    await context.getApi().insertDrawingObjectByReference(request);
+  }
+
+  /// Test for adding drawing object online with the image from the request.
+  Future<void> testInsertDrawingObjectByReferenceOnline() async
+  {
+    final requestDocument = await context.loadBinaryFile(localFile);
+
+    final requestDrawingObjectImageReferenceStream = await context.loadBinaryFile('Common/aspose-cloud.png');
+    final requestDrawingObjectImageReference = FileReference.fromLocalFile(requestDrawingObjectImageReferenceStream);
+
+    final requestDrawingObject = DrawingObjectInsertData();
+    requestDrawingObject.height = 0;
+    requestDrawingObject.left = 0;
+    requestDrawingObject.top = 0;
+    requestDrawingObject.width = 0;
+    requestDrawingObject.relativeHorizontalPosition = DrawingObjectInsert_RelativeHorizontalPositionEnum.margin;
+    requestDrawingObject.relativeVerticalPosition = DrawingObjectInsert_RelativeVerticalPositionEnum.margin;
+    requestDrawingObject.wrapType = DrawingObjectInsert_WrapTypeEnum.inline;
+    requestDrawingObject.imageReference = requestDrawingObjectImageReference;
+
+    final request = InsertDrawingObjectByReferenceOnlineRequest(
+      requestDocument,
+      requestDrawingObject,
+      nodePath: ''
+    );
+
+    await context.getApi().insertDrawingObjectByReferenceOnline(request);
+  }
+
   /// Test for deleting drawing object.
   Future<void> testDeleteDrawingObject() async
   {
